@@ -23,9 +23,24 @@ function ComputerPlay() {
     The choise should be given with a pop up screen. There should be no issue about case sensitivty.
     The choice of the player should be stored in a variable, playerSelection.
 
+- Step 3: round logic
+    We create a function that takes computer and player selection.
+    This checks the player awnser vs the computer answer and checks for the rules
+    IF playerSelection == computerSelection -> Draw
+    ELSE IF playerselection == 'Scissor' and computerselection == 'paper' -> player wins
+    ELSE IF playerselection == 'paper' and computerSelection == 'Rock' -> player wins
+    Else IF playerselection == 'Rock' and computerSelection == 'scissors' -> player wins
+    Else -> computer wins.
 
 
+- step 4: game logic
+    Creating a new function to play 5 rounds.
+    function playGame =>
+    rounds = 5
+    if rounds < 0 then play another round
+    rounds -= 1
 
+    if rounds == 0 end the game and announce the winner.
 
 
 */
@@ -42,10 +57,56 @@ function getPlayerSelection() {
         return selection;
     } else {
         alert('Please enter a valid response!')
+        getPlayerSelection();
     }
 }
 
-let computerSelection = computerPlay();
-let playerSelection = getPlayerSelection();
-console.log(computerSelection);
-console.log(playerSelection);
+
+let computerScore = 0;
+let playerScore = 0;
+
+function playRound() {
+    
+    let computerSelection = computerPlay();
+    let playerSelection = getPlayerSelection();
+
+    if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+        alert(`Its a draw this round! The computer used ${computerSelection} and you used ${playerSelection}`);
+
+    } else if (playerSelection.toLowerCase() == 'rock' && computerSelection.toLowerCase() == 'scissors') {
+        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
+        playerScore += 1;
+
+    } else if (playerSelection.toLowerCase() == 'paper' && computerSelection.toLowerCase() == 'rock') {
+        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
+        playerScore += 1;
+    } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection.toLowerCase() == 'paper') {
+        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
+        playerScore += 1;
+    } else {
+        alert(`The computer wins this round! ${computerSelection} beats ${playerSelection}`);
+        computerScore += 1;
+    }
+}
+
+function playGame() {
+    let rounds = 5;
+
+    while (rounds > 0) {
+        playRound();
+        rounds -= 1;
+        console.log(rounds)
+
+    }
+    if (playerScore > computerScore) {
+        alert(`You win! You scored ${playerScore} and the computer scored ${computerScore}`)
+    } else if (playerScore == computerScore) {
+        alert(`It's a draw! You scored ${playerScore} and the computer scored ${computerScore}`)
+    } else {
+        alert(`You lose! You scored ${playerScore} and the computer scored ${computerScore}`)
+    }
+
+
+}
+
+playGame();
