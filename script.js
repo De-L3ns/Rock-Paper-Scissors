@@ -52,7 +52,7 @@ function computerPlay() {
 }
 
 function getPlayerSelection() {
-    let selection = prompt('Would you like to play Rock, Paper or Scissors this turn? Enter below.');
+    let selection = prompt('Would you like to play Rock, Paper or Scissors this round? Choose your weapon:');
     if (selection.toLowerCase() == 'rock' || selection.toLowerCase() == 'paper' || selection.toLowerCase() == 'scissors') {
         return selection;
     } else {
