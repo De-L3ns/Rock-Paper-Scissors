@@ -19,6 +19,9 @@ function ComputerPlay() {
 
 }
 
+- Step 2: Create the PlayerSelection. The player should be able to select either rock, paper or scissors.
+    The choise should be given with a pop up screen. There should be no issue about case sensitivty.
+    The choice of the player should be stored in a variable, playerSelection.
 
 
 
@@ -30,8 +33,19 @@ function ComputerPlay() {
 function computerPlay() {
     let possibilities = ['Rock', 'Paper', 'Scissors'];
     let anwser = Math.floor(Math.random() * possibilities.length);
-    console.log(possibilities[anwser]);
     return(possibilities[anwser]);
 }
 
-computerPlay();
+function getPlayerSelection() {
+    let selection = prompt('Would you like to play Rock, Paper or Scissors this turn? Enter below.');
+    if (selection.toLowerCase() == 'rock' || selection.toLowerCase() == 'paper' || selection.toLowerCase() == 'scissors') {
+        return selection;
+    } else {
+        alert('Please enter a valid response!')
+    }
+}
+
+let computerSelection = computerPlay();
+let playerSelection = getPlayerSelection();
+console.log(computerSelection);
+console.log(playerSelection);
