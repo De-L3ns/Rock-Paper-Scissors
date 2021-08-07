@@ -56,8 +56,9 @@ function getPlayerSelection() {
     if (selection.toLowerCase() == 'rock' || selection.toLowerCase() == 'paper' || selection.toLowerCase() == 'scissors') {
         return selection;
     } else {
-        alert('Please enter a valid response!')
-        getPlayerSelection();
+        prompt('Please enter a valid response!')
+        selection = getPlayerSelection();
+        return selection;
     }
 }
 
@@ -99,11 +100,11 @@ function playGame() {
 
     }
     if (playerScore > computerScore) {
-        alert(`You win! You scored ${playerScore} and the computer scored ${computerScore}`)
+        alert(`You win! You scored ${playerScore} and the computer scored ${computerScore} points`)
     } else if (playerScore == computerScore) {
-        alert(`It's a draw! You scored ${playerScore} and the computer scored ${computerScore}`)
+        alert(`It's a draw! You scored ${playerScore} and the computer scored ${computerScore} points`)
     } else {
-        alert(`You lose! You scored ${playerScore} and the computer scored ${computerScore}`)
+        alert(`You lose! You scored ${playerScore} and the computer scored ${computerScore} points`)
     }
 
 
