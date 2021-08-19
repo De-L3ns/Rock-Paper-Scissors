@@ -43,54 +43,9 @@ function ComputerPlay() {
     if rounds == 0 end the game and announce the winner.
 
 
-*/
-
-function computerPlay() {
-    let possibilities = ['Rock', 'Paper', 'Scissors'];
-    let anwser = Math.floor(Math.random() * possibilities.length);
-    return(possibilities[anwser]);
-}
-
-function getPlayerSelection() {
-    let selection = prompt('Would you like to play Rock, Paper or Scissors this round? Choose your weapon:');
-    if (selection.toLowerCase() == 'rock' || selection.toLowerCase() == 'paper' || selection.toLowerCase() == 'scissors') {
-        return selection;
-    } else {
-        prompt('Please enter a valid response!')
-        selection = getPlayerSelection();
-        return selection;
-    }
-}
 
 
-let computerScore = 0;
-let playerScore = 0;
-
-function playRound() {
-    
-    let computerSelection = computerPlay();
-    let playerSelection = getPlayerSelection();
-
-    if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
-        alert(`Its a draw this round! The computer used ${computerSelection} and you used ${playerSelection}`);
-
-    } else if (playerSelection.toLowerCase() == 'rock' && computerSelection.toLowerCase() == 'scissors') {
-        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
-        playerScore += 1;
-
-    } else if (playerSelection.toLowerCase() == 'paper' && computerSelection.toLowerCase() == 'rock') {
-        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
-        playerScore += 1;
-    } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection.toLowerCase() == 'paper') {
-        alert(`You win this round! ${playerSelection} beats ${computerSelection}`);
-        playerScore += 1;
-    } else {
-        alert(`The computer wins this round! ${computerSelection} beats ${playerSelection}`);
-        computerScore += 1;
-    }
-}
-
-function playGame() {
+    function playGame() {
     let rounds = 5;
 
     while (rounds > 0) {
@@ -111,3 +66,64 @@ function playGame() {
 }
 
 playGame();
+
+*/
+
+
+function computerPlay() {
+    let possibilities = ['Rock', 'Paper', 'Scissors'];
+    let anwser = Math.floor(Math.random() * possibilities.length);
+    return(possibilities[anwser]);
+}
+
+
+let computerScore = 0;
+let playerScore = 0;
+
+function playRound(playerSelection) {
+    
+    let computerSelection = computerPlay();
+    
+
+    if (playerSelection.toLowerCase() === computerSelection.toLowerCase()) {
+        resultLine.textContent = `Its a draw this round! The computer used ${computerSelection} and you used ${playerSelection}`;
+        results.appendChild(resultLine);
+    } else if (playerSelection.toLowerCase() == 'rock' && computerSelection.toLowerCase() == 'scissors') {
+        resultLine.textContent = `You win this round! ${playerSelection} beats ${computerSelection}`;
+        results.appendChild(resultLine);
+        playerScore += 1;
+
+    } else if (playerSelection.toLowerCase() == 'paper' && computerSelection.toLowerCase() == 'rock') {
+        resultLine.textContent = `You win this round! ${playerSelection} beats ${computerSelection}`;
+        results.appendChild(resultLine);
+        playerScore += 1;
+    } else if (playerSelection.toLowerCase() == 'scissors' && computerSelection.toLowerCase() == 'paper') {
+        resultLine.textContent = `You win this round! ${playerSelection} beats ${computerSelection}`;
+        results.appendChild(resultLine);
+        playerScore += 1;
+    } else {
+        resultLine.textContent = `The computer wins this round! ${computerSelection} beats ${playerSelection}`;
+        results.appendChild(resultLine);
+        computerScore += 1;
+    }
+}
+
+
+const choiceButtons = document.querySelectorAll('#choice-button');
+const results = document.querySelector('#results');
+const resultLine = document.createElement('p');
+
+
+
+
+choiceButtons.forEach((choicebutton) => {
+    choicebutton.addEventListener('click', function(e) {
+        playerSelection = e.target.value;
+        console.log(typeof playerSelection);
+        playRound(playerSelection);
+    });
+
+});
+
+
+
