@@ -69,6 +69,7 @@ playGame();
 
 */
 
+// Functions
 
 function computerPlay() {
     let possibilities = ['Rock', 'Paper', 'Scissors'];
@@ -77,10 +78,7 @@ function computerPlay() {
 }
 
 
-let computerScore = 0;
-let playerScore = 0;
-
-function playRound(playerSelection) {
+function playRound() {
     
     let computerSelection = computerPlay();
     
@@ -108,19 +106,64 @@ function playRound(playerSelection) {
     }
 }
 
+function playGame() {
 
+    while (round < 5) {
+        playRound();
+        round += 1;
+        
+
+    }
+   
+
+
+}
+
+// Game variables
+let computerScore = 0;
+let playerScore = 0;
+let round = 0;
+
+// UI Elements
 const choiceButtons = document.querySelectorAll('#choice-button');
 const results = document.querySelector('#results');
 const resultLine = document.createElement('p');
+const currentRound = document.createElement('p');
+const currentScore = document.createElement('p');
+const endResults = document.createElement('p');
 
 
 
+
+
+
+// Game loop
 
 choiceButtons.forEach((choicebutton) => {
     choicebutton.addEventListener('click', function(e) {
         playerSelection = e.target.value;
-        console.log(typeof playerSelection);
-        playRound(playerSelection);
+        if (round < 4) {
+            playRound();
+            round += 1;
+            currentRound.textContent = `Round ${round}`;
+            currentScore.textContent = `Computer: ${computerScore} VS Player: ${playerScore}`;
+            results.appendChild(currentRound);
+            results.appendChild(currentScore);
+        } else {
+            if (playerScore > computerScore) {
+                endResults.textContent = (`You win! You scored ${playerScore} and the computer scored ${computerScore} points`);
+                results.appendChild(endResults);
+            } else if (playerScore == computerScore) {
+                endResults.textContent = (`It's a draw! You scored ${playerScore} and the computer scored ${computerScore} points`);
+                results.appendChild(endResults);
+            } else {
+                endResults.textContent = (`You lose! You scored ${playerScore} and the computer scored ${computerScore} points`);
+                results.appendChild(endResults);
+            }
+        }
+        
+        
+
     });
 
 });
