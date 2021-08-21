@@ -122,7 +122,7 @@ function playGame() {
 // Game variables
 let computerScore = 0;
 let playerScore = 0;
-let round = 0;
+let round = 1;
 
 // UI Elements
 const choiceButtons = document.querySelectorAll('#choice-button');
@@ -142,13 +142,13 @@ const endResults = document.createElement('p');
 choiceButtons.forEach((choicebutton) => {
     choicebutton.addEventListener('click', function(e) {
         playerSelection = e.target.value;
-        if (round < 4) {
+        if (round <= 5) {
             playRound();
-            round += 1;
             currentRound.textContent = `Round ${round}`;
             currentScore.textContent = `Computer: ${computerScore} VS Player: ${playerScore}`;
             results.appendChild(currentRound);
             results.appendChild(currentScore);
+            round += 1;
         } else {
             if (playerScore > computerScore) {
                 endResults.textContent = (`You win! You scored ${playerScore} and the computer scored ${computerScore} points`);
